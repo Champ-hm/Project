@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Solo Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>My Solo Discovery</h1>
+    <button onclick="fetchData()">Reveal Secret Message</button>
+    <div id="display" style="margin-top: 20px; font-weight: bold;"></div>
+
+    <script>
+        async function fetchData() {
+            const response = await fetch('/api/data');
+            const data = await response.json();
+            if (data.length > 0) {
+                document.getElementById('display').innerText = 
+                    `Title: ${data[0].title} | Message: ${data[0].secret_message}`;
+            }
+        }
+    </script>
+</body>
+</html>
