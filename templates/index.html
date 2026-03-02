@@ -63,7 +63,18 @@
                 const data = await response.json();
                 
                 if (data && data.length > 0) {
-                    displayDiv.innerText = `Title: ${data[0].title} \n Message: ${data[0].secret_message}`;
+                    // This line pulls the 'created_at' data from Supabase
+                    const rawDate = data[0].created_at;
+                    // This turns the raw timestamp into a readable date format
+                    const formattedDate = new Date(rawDate).toLocaleString();
+
+                    displayDiv.innerHTML = `
+                        <div style="font-size: 22px;">Title: ${data[0].title}</div>
+                        <div style="margin: 10px 0;">Message: ${data[0].secret_message}</div>
+                        <div style="font-size: 14px; color: #888; font-weight: normal;">
+                            Created on: ${formattedDate}
+                        </div>
+                    `;
                 } else {
                     displayDiv.innerText = "No data found in your database!";
                 }
